@@ -1,5 +1,7 @@
 package nextstep.optional;
 
+import java.util.Optional;
+
 public class User {
     private String name;
     private Integer age;
@@ -32,8 +34,9 @@ public class User {
         return isInRange;
     }
 
-    public static boolean ageIsInRange2(User user) {
-        return false;
+    public static boolean ageIsInRange2(User user) { // param 은 뭐가 날라오는지 모르니깐 Optional 로 만들어서 사용하면 null check 없이 사용가능하다. 5줄 -> 2줄
+        Optional<User> optionalUser = Optional.ofNullable(user);
+        return optionalUser.map(User::getAge).filter(x -> x >= 30 && x <= 45).isPresent();
     }
 
     @Override
