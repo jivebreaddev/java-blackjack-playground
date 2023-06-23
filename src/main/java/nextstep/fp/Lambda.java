@@ -6,9 +6,7 @@ public class Lambda {
     public static void printAllOld(List<Integer> numbers) {
         System.out.println("printAllOld");
 
-        for (int number : numbers) {
-            System.out.println(number);
-        }
+        numbers.forEach(value -> System.out.println(value));
     }
 
     public static void printAllLambda(List<Integer> numbers) {
@@ -25,32 +23,18 @@ public class Lambda {
             }
         }).start();
     }
-
+    public static int sumConditional(List<Integer> numbers, Conditional conditional){
+        return numbers.stream().filter(x -> conditional.test(x)).reduce(0, (x,y) -> x+y);
+    }
     public static int sumAll(List<Integer> numbers) {
-        int total = 0;
-        for (int number : numbers) {
-            total += number;
-        }
-        return total;
+        return sumConditional(numbers, x -> true);
     }
 
     public static int sumAllEven(List<Integer> numbers) {
-        int total = 0;
-        for (int number : numbers) {
-            if (number % 2 == 0) {
-                total += number;
-            }
-        }
-        return total;
+        return sumConditional(numbers, x -> x % 2 == 0);
     }
 
     public static int sumAllOverThree(List<Integer> numbers) {
-        int total = 0;
-        for (int number : numbers) {
-            if (number > 3) {
-                total += number;
-            }
-        }
-        return total;
+        return sumConditional(numbers, x -> x > 3);
     }
 }
